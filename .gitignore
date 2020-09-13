@@ -10,3 +10,4 @@ build/Release
 # Dependency directories
 node_modules/
 job-portal-ui/package-lock.json
+jobportal-be/.mvn/*

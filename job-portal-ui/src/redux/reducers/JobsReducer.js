@@ -6,7 +6,7 @@ import {
 
 const initialState = {
     loading: false,
-    users: [],
+    jobs: [],
     error: ''
 }
 
@@ -20,15 +20,13 @@ const JobsReducer = (state = initialState, action) => {
         case FETCH_JOBS_SUCCESS:
             return {
                 loading: false,
-                users: action.payload,
-                loggedIn: true,
+                jobs: action.payload,
                 error: ''
             }
         case FETCH_JOBS_FAILURE:
             return {
                 loading: false,
-                users: [],
-                loggedIn: false,
+                jobs: [],
                 error: action.payload
             }
         default: return state

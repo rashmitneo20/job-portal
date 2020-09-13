@@ -20,10 +20,9 @@ function JobPortal() {
           <Route path={"/login"} exact component={Login} />
           <Route path={"/apply"} exact component={ApplyJob} />
           <Route path={"/addjobs"} component={AddJob} />
-          <Route path={"jobcandidatelist"} component={JobCandidateList} />
+          <Route path={"/jobcandidatelist"} component={JobCandidateList} />
         </Switch>
       </Router>
-      {/* <Login /> */}
       <Footer />
     </div>
   );
