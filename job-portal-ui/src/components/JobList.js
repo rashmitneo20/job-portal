@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
-// import { useState } from 'react'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
-// import Jobs from './Jobs';
 import { fetchJobList } from '../redux';
 // import { initialState } from '../resources/job-list'
 
-function JobList({ jobsList = {}, fetchJobList }) {
+function JobList(props) {
+    const {
+        jobsList = {},
+        userData = {},
+        fetchJobList
+    } = props;
 
-    // const [jobs, setJobs] = useState(initialState);
     useEffect(() => {
         fetchJobList()
     }, [])
+
     return (
         <table className="table">
             <thead>
@@ -31,7 +34,10 @@ function JobList({ jobsList = {}, fetchJobList }) {
                                 <td>{job.company}</td>
                                 <td>{job.jobName}</td>
                                 <td>{job.jobLocation}</td>
-                                <td><Link to="/apply">Apply</Link></td>
+                                {(userData && userData.access === "emp") ?
+                                    <td><Link to="/apply">Close</Link> <Link to="/apply">Delete</Link></td> :
+                                    <td><Link to="/apply">Apply</Link></td>
+                                }
                             </tr>
                         )
                 }
@@ -41,9 +47,9 @@ function JobList({ jobsList = {}, fetchJobList }) {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
-        jobsList: state.jobStore.jobs
+        jobsList: state.jobStore.jobs,
+        userData: state.userStore.users
     }
 }
 

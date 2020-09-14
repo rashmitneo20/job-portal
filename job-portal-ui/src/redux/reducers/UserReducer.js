@@ -1,12 +1,15 @@
 import {
     FETCH_USERS_REQUEST,
     FETCH_USERS_SUCCESS,
-    FETCH_USERS_FAILURE
+    FETCH_USERS_FAILURE,
+    USERS_CANDIDATE,
+    USERS_EMPLOYER,
+    USERS_LOGOUT
 } from '../ActionTypes'
 
 const initialState = {
     loading: false,
-    users: [],
+    users: {},
     loggedIn: false,
     error: ''
 }
@@ -28,9 +31,30 @@ const UserReducer = (state = initialState, action) => {
         case FETCH_USERS_FAILURE:
             return {
                 loading: false,
-                users: [],
+                users: {},
                 loggedIn: false,
                 error: action.payload
+            }
+        case USERS_CANDIDATE:
+            return {
+                loading: false,
+                users: action.payload,
+                loggedIn: true,
+                error: ''
+            }
+        case USERS_EMPLOYER:
+            return {
+                loading: false,
+                users: action.payload,
+                loggedIn: true,
+                error: ''
+            }
+        case USERS_LOGOUT:
+            return {
+                loading: false,
+                users: {},
+                loggedIn: false,
+                error: ''
             }
         default: return state
     }
