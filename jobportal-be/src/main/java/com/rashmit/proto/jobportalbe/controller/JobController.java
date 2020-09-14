@@ -28,7 +28,6 @@ public class JobController {
 	@GetMapping("/all")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Job> getAllJobs() {
-		System.out.println("calling service");
 		return jobService.getAllJobs();
 		
 	}
