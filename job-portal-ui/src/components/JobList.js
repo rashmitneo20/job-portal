@@ -24,14 +24,16 @@ function JobList({ jobsList = {}, fetchJobList }) {
             </thead>
             <tbody>
                 {
-                    jobsList.map(job =>
-                        <tr key={job.id}>
-                            <td>{job.company}</td>
-                            <td>{job.jobName}</td>
-                            <td>{job.jobLocation}</td>
-                            <td><Link to="/apply">Apply</Link></td>
-                        </tr>
-                    )
+                    jobsList
+                        .filter(job => job.status === "open")
+                        .map(job =>
+                            <tr key={job.id}>
+                                <td>{job.company}</td>
+                                <td>{job.jobName}</td>
+                                <td>{job.jobLocation}</td>
+                                <td><Link to="/apply">Apply</Link></td>
+                            </tr>
+                        )
                 }
             </tbody>
         </table>
