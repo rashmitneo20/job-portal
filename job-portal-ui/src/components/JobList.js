@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
+// import { useState } from 'react'
 import { Link } from "react-router-dom";
-import Jobs from './Jobs';
-import { initialState } from '../resources/job-list'
+import { connect } from 'react-redux'
+// import Jobs from './Jobs';
+import { fetchJobList } from '../redux';
+// import { initialState } from '../resources/job-list'
 
-export default function JobList() {
+function JobList({ jobsList = {}, fetchJobList }) {
 
-    const [jobs, setJobs] = useState(initialState);
+    // const [jobs, setJobs] = useState(initialState);
+    useEffect(() => {
+        fetchJobList()
+    }, [])
     return (
         <table className="table">
             <thead>
@@ -18,11 +24,11 @@ export default function JobList() {
             </thead>
             <tbody>
                 {
-                    jobs.map(job =>
+                    jobsList.map(job =>
                         <tr key={job.id}>
                             <td>{job.company}</td>
-                            <td>{job.name}</td>
-                            <td>{job.location}</td>
+                            <td>{job.jobName}</td>
+                            <td>{job.jobLocation}</td>
                             <td><Link to="/apply">Apply</Link></td>
                         </tr>
                     )
@@ -31,3 +37,21 @@ export default function JobList() {
         </table>
     );
 }
+
+const mapStateToProps = state => {
+    console.log(state);
+    return {
+        jobsList: state.jobStore.jobs
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchJobList: () => dispatch(fetchJobList())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(JobList)

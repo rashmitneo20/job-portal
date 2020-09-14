@@ -3,8 +3,8 @@ import JobsReducer from './reducers/JobsReducer'
 import UserReducer from './reducers/UserReducer'
 
 const JobPortalReducer = combineReducers({
-    jobs: JobsReducer,
-    users: UserReducer
+    jobStore: JobsReducer,
+    userStore: UserReducer
 })
 
 export default JobPortalReducer

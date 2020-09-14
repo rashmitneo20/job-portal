@@ -5,14 +5,16 @@ import {
     FETCH_JOBS_FAILURE
 } from '../ActionTypes'
 
-export const fetchUserDetails = () => {
+export const fetchJobList = () => {
     return (dispatch) => {
         dispatch(fetchJobsRequest())
         axios
             .get('http://localhost:8080/jobs/all')
             .then(response => {
                 // response.data is the users
-                const jobs = response.data
+                const jobs = response.data;
+                console.log("getting response...........");
+                console.log(response);
                 dispatch(fetchJobsSuccess(jobs))
             })
             .catch(error => {
